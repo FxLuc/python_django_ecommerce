@@ -32,7 +32,7 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-                <form method="POST" class="needs-validation" novalidate="">
+                <form method="POST" action="{% url 'admin_login_process' %}" class="needs-validation" novalidate="">
                   {% csrf_token %}
                   <div class="form-group">
                     <label for="email">Username</label>

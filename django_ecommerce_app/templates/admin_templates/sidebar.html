@@ -16,8 +16,8 @@
         <li class="dropdown {% if request.path == category_list %} active {% endif %}{% if request.path == category_create %} active {% endif %}{% if request.path == category_update %} active {% endif %}">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-dice-d6"></i><span>Category</span></a>
           <ul class="dropdown-menu">
-            <li class='{% if request.path == category_list %} active {% endif %}{% if request.path == category_update %} active {% endif %}'><a class="nav-link" href="">All Categories</a></li>
-            <li class='{% if request.path == category_create %} active {% endif %}'><a class="nav-link" href="">Add Categories</a></li>
+            <li class='{% if request.path == category_list %} active {% endif %}{% if request.path == category_update %} active {% endif %}'><a class="nav-link" href="{% url 'category_list' %}" >All Categories</a></li>
+            <li class='{% if request.path == category_create %} active {% endif %}'><a class="nav-link" href="{% url 'category_create' %}">Add Categories</a></li>
           </ul>
         </li>
 
@@ -29,8 +29,8 @@
         <li class="dropdown {% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_create %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-dice-d6"></i><span>Sub Category</span></a>
           <ul class="dropdown-menu">
-            <li class='{% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}'><a class="nav-link" href="">All Sub Categories</a></li>
-            <li class='{% if request.path == sub_category_create %} active {% endif %}'><a class="nav-link" href="">Add Sub Categories</a></li>
+            <li class='{% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_list' %}">All Sub Categories</a></li>
+            <li class='{% if request.path == sub_category_create %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_create' %}">Add Sub Categories</a></li>
           </ul>
         </li>
 
@@ -85,7 +85,7 @@
       </ul>
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-        <a href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
+        <a href="{% url 'admin_logout_process' %}" class="btn btn-primary btn-lg btn-block btn-icon-split">
           <i class="fas fa-rocket"></i> LOGOUT
         </a>
       </div>        </aside>
