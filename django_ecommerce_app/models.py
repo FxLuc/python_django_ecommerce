@@ -27,11 +27,12 @@ class StaffUser(models.Model):
 class MerchantUser(models.Model):
     auth_user_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile_pic = models.FileField(default="")
+    created_at = models.DateTimeField(auto_now_add=True)
     company_name = models.CharField(max_length=150)
     gst_details = models.CharField(max_length=150)
-    address = models.TextField()
+    address = models.TextField(default="")
+    phone_number = models.CharField(default="", max_length=13)
     is_added_by_admin = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
 
@@ -39,12 +40,14 @@ class CustomerUser(models.Model):
     auth_user_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile_pic = models.FileField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
+    address = models.TextField(default="")
+    phone_number = models.CharField(default="", max_length=13)
 
 
 class Categories(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=150)
-    url_slug = models.CharField(max_length=150)
+    url_slug = models.CharField(max_length=255)
     thumbnail = models.FileField()
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,7 +64,7 @@ class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    url_slug = models.CharField(max_length=150)
+    url_slug = models.CharField(max_length=255)
     thumbnail = models.FileField()
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -73,7 +76,7 @@ class SubCategories(models.Model):
 
 class Products(models.Model):
     id = models.AutoField(primary_key=True)
-    url_slug = models.CharField(max_length=150)
+    url_slug = models.CharField(max_length=255)
     subcategories_id = models.ForeignKey(SubCategories, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=150)
     brand = models.CharField(max_length=150)
@@ -82,8 +85,7 @@ class Products(models.Model):
     product_description = models.TextField()
     product_long_description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    added_by_merchant = models.ForeignKey(
-        MerchantUser, on_delete=models.CASCADE)
+    added_by_merchant = models.ForeignKey(MerchantUser, on_delete=models.CASCADE)
     in_stock_total = models.IntegerField(default=1)
     is_active = models.IntegerField(default=1)
 
@@ -206,9 +208,9 @@ def create_user_profile(sender, instance, created, **kwargs):
         if instance.user_type == 2:
             StaffUser.objects.create(auth_user_id=instance)
         if instance.user_type == 3:
-            MerchantUser.objects.create(auth_user_id=instance, company_name="", gst_details="", address="")
+            MerchantUser.objects.create(auth_user_id=instance, company_name="", gst_details="", address="", phone_number="")
         if instance.user_type == 4:
-            CustomerUser.objects.create(auth_user_id=instance)
+            CustomerUser.objects.create(auth_user_id=instance, address="", phone_number="")
 
 
 @receiver(post_save, sender=CustomUser)
