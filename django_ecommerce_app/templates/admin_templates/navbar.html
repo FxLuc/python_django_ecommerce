@@ -1,0 +1,38 @@
+{% load static %}
+<div class="navbar-bg"></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><em class="fas fa-bars"></em></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><em class="fas fa-search"></em></a></li>
+        </ul>
+        <div class="search-element">
+
+        </div>
+    </form>
+    <ul class="navbar-nav navbar-right">
+
+        <li class="dropdown"><a href="#" data-toggle="dropdown"
+                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="{% static '/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">Hi, {{ request.user.username }}</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-title">Logged in 12 min ago</div>
+                <a href="features-profile.html" class="dropdown-item has-icon">
+                    <em class="fas fa-user-alt"></em>&nbsp;Profile
+                </a>
+                <a href="features-activities.html" class="dropdown-item has-icon">
+                    <em class="fas fa-history"></em>&nbsp;Activities
+                </a>
+                <a href="features-settings.html" class="dropdown-item has-icon">
+                    <em class="fas fa-cog"></em>&nbsp;Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'admin_logout_process' %}" class="dropdown-item has-icon text-danger">
+                    <em class="fas fa-sign-out-alt"></em> Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

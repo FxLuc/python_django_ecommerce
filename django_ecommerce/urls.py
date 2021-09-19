@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django_ecommerce import settings
+from django_ecommerce import settings
 from django_ecommerce_app import views
+from django_ecommerce_app import adminviews
 from django.conf.urls.static import static
-from django_ecommerce import settings 
 
 
 urlpatterns = [
-    path('admin/', views.admin_login),
-    path('index', views.index)
+    path('admin/', views.admin_login, name="admin_login"),
+    path('index', views.index),
+
+    # ADMIN
+    path('admin_home', adminviews.admin_home, name="admin_home"),
+    path('admin_login_process',views.admin_login_process,name="admin_login_process"),
+    path('admin_logout_process',views.admin_logout_process,name="admin_logout_process"),
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
