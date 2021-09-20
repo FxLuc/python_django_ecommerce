@@ -37,5 +37,9 @@ urlpatterns = [
     path('sub_category_list',adminviews.SubCategoriesListView.as_view(),name="sub_category_list"),
     path('sub_category_create',adminviews.SubCategoriesCreate.as_view(),name="sub_category_create"),
     path('sub_category_update/<slug:pk>',adminviews.SubCategoriesUpdate.as_view(),name="sub_category_update"),
-    
+    #Merchant User
+    path('merchant_create',adminviews.MerchantUserCreateView.as_view(),name="merchant_create"),
+    path('merchant_list',adminviews.MerchantUserListView.as_view(),name="merchant_list"),
+    path('merchant_update/<slug:pk>',adminviews.MerchantUserUpdateView.as_view(),name="merchant_update"),
+
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
