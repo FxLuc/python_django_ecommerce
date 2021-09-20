@@ -12,10 +12,16 @@
                 <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Category</span></a>
                 <ul class="dropdown-menu">
                     <li class='{% if request.path == category_list %} active {% endif %}{% if request.path == category_update %} active {% endif %}'>
-                        <a class="nav-link" href="{% url 'category_list' %}"><em class="fas fa-th-list"></em><span>&nbsp;All Categories</span></a>
+                        <a class="nav-link" href="{% url 'category_list' %}">
+                            <em class="fas fa-list"></em>
+                            <span>&nbsp;All Categories</span>
+                        </a>
                     </li>
                     <li class='{% if request.path == category_create %} active {% endif %}'>
-                        <a class="nav-link" href="{% url 'category_create' %}"><em class="fas fa fa-plus-square" aria-hidden="true"></em><span>&nbsp;Add categories</span></a>
+                        <a class="nav-link" href="{% url 'category_create' %}">
+                            <em class="far fa-plus-square" aria-hidden="true"></em>
+                            <span>&nbsp;Add categories</span>
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -26,8 +32,18 @@
             <li class="dropdown {% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_create %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}">
                 <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Sub Category</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_list' %}">All Sub Categories</a></li>
-                    <li class='{% if request.path == sub_category_create %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_create' %}">Add Sub Categories</a></li>
+                    <li class='{% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}'>
+                        <a class="nav-link" href="{% url 'sub_category_list' %}">
+                            <em class="fas fa-list"></em>
+                            <span>&nbsp;All Sub Categories</span>
+                        </a>
+                    </li>
+                    <li class='{% if request.path == sub_category_create %} active {% endif %}'>
+                        <a class="nav-link" href="{% url 'sub_category_create' %}">
+                            <em class="far fa-plus-square" aria-hidden="true"></em>
+                            <span>&nbsp;Add Sub Categories</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -35,10 +51,20 @@
             {% url 'merchant_list' as merchant_list %}
             {% url 'merchant_update' id as merchant_update %}
             <li class="dropdown {% if request.path == merchant_create %} active {% endif %}{% if request.path == merchant_list %} active {% endif %} {% if request.path == merchant_update %} active {% endif %}">
-                <a href="#" class="nav-link has-dropdown"><em class="fas fa-dice-d6"></em><span>Merchant User</span></a>
+                <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Merchant User</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{% if request.path == merchant_create %} active {% endif %}'><a class="nav-link" href="{% url 'merchant_create' %}">Add Merchant User</a></li>
-                    <li class='{% if request.path == merchant_list %} active {% endif %} {% if request.path == merchant_update %} active {% endif %}' ><a class="nav-link" href="{% url 'merchant_list' %}">Merchant User List</a></li>
+                    <li class='{% if request.path == merchant_list %} active {% endif %} {% if request.path == merchant_update %} active {% endif %}' >
+                        <a class="nav-link" href="{% url 'merchant_list' %}">
+                            <em class="fas fa-list"></em>
+                            <span>&nbsp;Merchant User List</span>
+                        </a>
+                    </li>
+                    <li class='{% if request.path == merchant_create %} active {% endif %}'>
+                        <a class="nav-link" href="{% url 'merchant_create' %}">
+                            <em class="far fa-plus-square"></em>
+                            <span>&nbsp;Add Merchant User</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

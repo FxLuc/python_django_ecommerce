@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView,CreateView,UpdateView
-from django_ecommerce_app.models import Categories,SubCategories,CustomUser,MerchantUser
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.messages.views import messages
+from django.views.generic import ListView,CreateView,UpdateView
+from django_ecommerce_app.models import Categories,SubCategories,CustomUser,MerchantUser
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 
 @login_required(login_url="/admin/")
@@ -17,6 +18,23 @@ def admin_home(request):
 class CategoriesListView(ListView):
     model=Categories
     template_name="admin_templates/category_list.html"
+    paginate_by=3
+
+    def get_queryset(self):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=Categories.objects.filter(Q(title__contains=filter_val) | Q(description__contains=filter_val)).order_by(order_by)
+        else:
+            cat=Categories.objects.all().order_by(order_by)
+        return cat
+
+    def get_context_data(self,**kwargs):
+        context=super(CategoriesListView,self).get_context_data(**kwargs)
+        context["filter"]=self.request.GET.get("filter","")
+        context["orderby"]=self.request.GET.get("orderby","id")
+        context["all_table_fields"]=Categories._meta.get_fields()
+        return context
 
 
 class CategoriesCreate(SuccessMessageMixin,CreateView):
@@ -36,6 +54,23 @@ class CategoriesUpdate(SuccessMessageMixin,UpdateView):
 class SubCategoriesListView(ListView):
     model=SubCategories
     template_name="admin_templates/sub_category_list.html"
+    paginate_by=3
+
+    def get_queryset(self):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=SubCategories.objects.filter(Q(title__contains=filter_val) | Q(description__contains=filter_val)).order_by(order_by)
+        else:
+            cat=SubCategories.objects.all().order_by(order_by)
+        return cat
+
+    def get_context_data(self,**kwargs):
+        context=super(SubCategoriesListView,self).get_context_data(**kwargs)
+        context["filter"]=self.request.GET.get("filter","")
+        context["orderby"]=self.request.GET.get("orderby","id")
+        context["all_table_fields"]=SubCategories._meta.get_fields()
+        return context
 
 
 class SubCategoriesCreate(SuccessMessageMixin,CreateView):
@@ -55,7 +90,23 @@ class SubCategoriesUpdate(SuccessMessageMixin,UpdateView):
 class MerchantUserListView(ListView):
     model=MerchantUser
     template_name="admin_templates/merchant_list.html"
+    paginate_by=3
 
+    def get_queryset(self):
+        filter_val=self.request.GET.get("filter","")
+        order_by=self.request.GET.get("orderby","id")
+        if filter_val!="":
+            cat=MerchantUser.objects.filter(Q(auth_user_id__first_name__contains=filter_val) |Q(auth_user_id__last_name__contains=filter_val) | Q(auth_user_id__email__contains=filter_val) | Q(auth_user_id__username__contains=filter_val)).order_by(order_by)
+        else:
+            cat=MerchantUser.objects.all().order_by(order_by)
+        return cat
+
+    def get_context_data(self,**kwargs):
+        context=super(MerchantUserListView,self).get_context_data(**kwargs)
+        context["filter"]=self.request.GET.get("filter","")
+        context["orderby"]=self.request.GET.get("orderby","id")
+        context["all_table_fields"]=MerchantUser._meta.get_fields()
+        return context
 
 
 class MerchantUserCreateView(SuccessMessageMixin,CreateView):
