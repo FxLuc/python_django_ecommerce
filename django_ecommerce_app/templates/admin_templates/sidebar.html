@@ -1,39 +1,37 @@
 {% load static %}
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
-        <div class="sidebar-brand"><i class="fa fa-bomb fa-2x" aria-hidden="true">FTEN</i></div>
-        <div class="sidebar-brand sidebar-brand-sm"><i class="fa fa-bomb" aria-hidden="true">FTEN</i></div>
+        <div class="sidebar-brand"><em class="fa fa-atom fa-2x text-danger" aria-hidden="true">FTEN</em></div>
+        <div class="sidebar-brand sidebar-brand-sm"><em class="fa fa-atom" aria-hidden="true">FTEN</em></div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="dropdown active">
-                <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-chart-pie"></em><span>&nbsp; Dashboard</span></a>
-                <ul class="dropdown-menu">
-                    <li class=active>
-                        <a class="nav-link" href="general_dashboard.html">
-                            <em class="fas fas fa-chart-line"></em><span> &nbsp;General Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="ecommerce_dashboard.html">
-                            <em class="fas fa-chart-area"></em><span>&nbsp; Ecommerce Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
+            {% url 'category_list' as category_list %}
+            {% url 'category_create' as category_create %}
+            {% url 'category_update' id as category_update %}
+            <li class="dropdown {% if request.path == category_list %} active {% endif %}{% if request.path == category_create %} active {% endif %}{% if request.path == category_update %} active {% endif %}">
+            <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Category</span></a>
+            <ul class="dropdown-menu">
+                <li class='{% if request.path == category_list %} active {% endif %}{% if request.path == category_update %} active {% endif %}'>
+                    <a class="nav-link" href="{% url 'category_list' %}"><em class="fas fa-th-list"></em><span>&nbsp;All Categories</span></a>
+                </li>
+                <li class='{% if request.path == category_create %} active {% endif %}'>
+                    <a class="nav-link" href="{% url 'category_create' %}"><em class="fas fa fa-plus-square" aria-hidden="true"></em><span>&nbsp;Add categories</span></a>
+                </li>
+            </ul>
             </li>
-            <li class="menu-header">Starter</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <em class="fas fa-columns"></em><span> &nbsp;Layout</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-                </ul>
+            {% url 'sub_category_list' as sub_category_list %}
+            {% url 'sub_category_create' as sub_category_create %}
+            {% url 'sub_category_update' id as sub_category_update %}
+            <li class="dropdown {% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_create %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}">
+            <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Sub Category</span></a>
+            <ul class="dropdown-menu">
+                <li class='{% if request.path == sub_category_list %} active {% endif %}{% if request.path == sub_category_update %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_list' %}">All Sub Categories</a></li>
+                <li class='{% if request.path == sub_category_create %} active {% endif %}'><a class="nav-link" href="{% url 'sub_category_create' %}">Add Sub Categories</a></li>
+            </ul>
             </li>
         </ul>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="{% url 'admin_logout_process' %}" class="btn btn-primary btn-lg btn-block btn-icon-split">
+            <a href="{% url 'admin_logout_process' %}" class="btn btn-secondary btn-lg btn-block btn-icon-split">
                 <span><em class="fas fas fa-sign-out-alt"></em> LOGOUT</span>
             </a>
         </div>

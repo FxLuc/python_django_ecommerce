@@ -1,6 +1,6 @@
 {% load static %}
 <div class="navbar-bg"></div>
-<nav class="navbar navbar-expand-lg main-navbar">
+<nav class="navbar navbar-expand-lg main-navbar bg-warning">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><em class="fas fa-bars"></em></a></li>
@@ -12,10 +12,11 @@
     </form>
     <ul class="navbar-nav navbar-right">
 
-        <li class="dropdown"><a href="#" data-toggle="dropdown"
-                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{% static '/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">Hi, {{ request.user.username }}</div>
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                {% comment %} <img alt="image" src="{% static '/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1"> {% endcomment %}
+                <span><em class="fa fa-user-circle" aria-hidden="true"></em>
+                <div class="d-sm-none d-lg-inline-block">Hi, {{ request.user.username }}</div></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 12 min ago</div>
