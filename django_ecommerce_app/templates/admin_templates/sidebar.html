@@ -67,6 +67,25 @@
                     </li>
                 </ul>
             </li>
+            {% url 'product_view' as product_view %}
+            {% url 'product_list' as product_list %}
+            <li class="dropdown {% if request.path == product_view %} active {% endif %}  {% if request.path == product_list %} active {% endif %}">
+                <a href="#" class="nav-link has-dropdown"><em class="fas fas fa-dice-d6"></em><span>&nbsp;Products</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{% if request.path == product_list %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'product_list' %}">
+                            <em class="fas fa-list"></em>
+                            <span>&nbsp;Product List</span>
+                        </a>
+                    </li>
+                    <li class="{% if request.path == product_view %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'product_view' %}">
+                            <em class="far fa-plus-square"></em>
+                            <span>&nbsp;Add Product</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="{% url 'admin_logout_process' %}" class="btn btn-secondary btn-lg btn-block btn-icon-split">

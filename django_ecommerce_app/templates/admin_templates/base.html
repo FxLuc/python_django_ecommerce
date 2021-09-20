@@ -23,11 +23,6 @@
   <link rel="stylesheet" href="{% static '/css/style.css' %}">
   <link rel="stylesheet" href="{% static '/css/components.css' %}">
   {% block custom_css %}{% endblock custom_css %}
-  <style>
-    ul.errorlist{
-      margin: 0px;
-    }
-  </style>
 </head>
 
 <body>
@@ -35,7 +30,6 @@
     <div class="main-wrapper main-wrapper-1">
       {% include 'admin_templates/navbar.html' %}
       {% include 'admin_templates/sidebar.html' with id=form.instance.id %}
-
 
       <!-- Main Content -->
       <div class="main-content">
@@ -47,11 +41,19 @@
           {% if messages %}
             {% for message in messages %}
               {% if message.tags == "success" %}
-                <div class="alert alert-success">{{ message }}</div>
+                <div class="alert alert-info alert-dismissible fade show border border-light" role="alert">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </div>
               {% endif %}
+
               {% if message.tags == "error" %}
-                <div class="alert alert-danger">{{ message }}</div>
+                <div class="alert alert-danger alert-dismissible fade show border border-light" role="alert">{{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </div>
               {% endif %}
+            
             {% endfor %}
           {% endif %}
 

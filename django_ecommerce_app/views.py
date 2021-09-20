@@ -17,7 +17,6 @@ def admin_login(request):
 def admin_login_process(request):
     username=request.POST.get("username")
     password=request.POST.get("password")
-
     user=authenticate(request=request,username=username,password=password)
     if user is not None:
         login(request=request,user=user)

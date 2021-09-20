@@ -37,6 +37,11 @@
         <article class="article article-style-b">
             <div class="article-header">
                 <div class="article-image" data-background="/media/{{ sub_category.thumbnail }}"></div>
+                <div class="article-badge">
+                    <div class="badge {% if sub_category.is_active == 1 %} badge-info {% endif %}{% if sub_category.is_active  == 0 %} badge-light {% endif %}">
+                        <span>Active</span>
+                    </div>
+                </div>
             </div>
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ sub_category.title }}</div>
@@ -47,12 +52,7 @@
                 <div class="text-black-50">Url slug:</div>
                 <div class="text-primary"><em>{{ sub_category.url_slug }}</em></div>
                 <div class="article-cta">
-                    <label class="custom-switch mt-2" style="float:left">
-                        <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" {% if sub_category.is_active == 1 %}checked{% endif %}>
-                        <span class="custom-switch-indicator"></span>
-                        <span class="custom-switch-description">Active</span>
-                    </label>
-                    <a href="{% url 'sub_category_update' sub_category.id %}" class="btn btn-warning"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'sub_category_update' sub_category.id %}" class="btn btn-block btn-warning"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>
         </article>

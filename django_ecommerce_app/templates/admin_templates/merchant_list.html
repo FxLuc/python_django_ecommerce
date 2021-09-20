@@ -3,19 +3,7 @@
 {% block custom_css %}{% endblock custom_css %}
 {% block page_title %}Merchant User List{% endblock page_title %}
 {% block page_content %}
-<div class="row">
-    <div class="col-lg-12">
-        <div class="search-element">
-            <form method="get">
-                <div class="row mx-0 form-group">
-                    <input  type="search" placeholder="Search" aria-label="Search" data-width="250" class="col form-control" style="border-radius: 0" placeholder="Nhập số nguyên dương bất kỳ"  name="filter" value="{{ filter }}">
-                    <button type="submit" class="col-3 btn btn-danger" style="border-radius: 0;">Search</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+{% include 'admin_templates/search.html' %}
 <div class="row">
     <div class="col-lg-12">
         <div class="search-element">
@@ -38,6 +26,11 @@
         <article class="article article-style-b">
             <div class="article-header">
                 <div class="article-image" data-background="{{ merchantuser.profile_pic }}"></div>
+                <div class="article-badge">
+                    <div class="badge {% if merchantuser.is_added_by_admin == 1 %} badge-info {% endif %}{% if merchantuser.is_added_by_admin == 0 %} badge-light {% endif %}">
+                       <span>Add by Admin</span>
+                    </div>
+                </div>
             </div>
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ merchantuser.auth_user_id.first_name }} {{ merchantuser.auth_user_id.last_name }}</div>
@@ -46,14 +39,8 @@
                 Company: <span class="text-dark">{{ merchantuser.company_name }}</span><br/>
                 Address: <span class="text-dark">{{ merchantuser.address }}</span><br/>
                 Phone number: <span class="text-dark">{{ merchantuser.phone_number }}</span><br/>
-                Added by Admin: <span class="text-dark">{{ merchantuser.is_added_by_admin }}</span><br/>
                 <div class="article-cta">
-                    <label class="custom-switch mt-2" style="float:left">
-                        <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" {% if merchantuser.auth_user_id.is_active == 1 %}checked{% endif %}>
-                        <span class="custom-switch-indicator"></span>
-                        <span class="custom-switch-description">Active</span>
-                    </label>
-                    <a href="{% url 'merchant_update' merchantuser.auth_user_id.id %}" class="btn btn-warning"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'merchant_update' merchantuser.auth_user_id.id %}" class="btn btn-block btn-warning"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>
         </article>
