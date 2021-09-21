@@ -2,6 +2,7 @@
 ### How to run
 ##### 1. Terminal:
 * `python3 manage.py runserver`
+
 or:
 * `python3 manage.py makemigrations`
 * `python3 manage.py migrate`
@@ -12,6 +13,10 @@ or:
 * 127.0.0.1:8000/admin
 
 ----------
-#### Le Tuan Luc
+#### [Le Tuan Luc](https://github.com/often127)
 #### Pham Quan
 ###### Thanks to hackstartsj
+
+
+### ER DIAGRAM
+<img src="media/ERD_Diagram.png" style="width:100%" alt="ER Diagram"/>
