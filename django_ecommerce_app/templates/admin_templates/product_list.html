@@ -38,10 +38,10 @@
                 <div class="text-black-50">Url slug:</div>
                 <div class="text-primary"><em>{{ product.product.url_slug}}</em></div>
                 <div class="article-cta mt-2">
-                    <a href="#" class="btn btn-danger btn-block">ADD MEDIA <em class="fas fa-chevron-right"></em></a>
-                    <a href="#" class="btn btn-success btn-block">EDIT MEDIA <em class="fas fa-chevron-right"></em></a>
-                    <a href="#" class="btn btn-primary btn-block">ADD STOCKS <em class="fas fa-chevron-right"></em></a>
-                    <a href="{% url 'category_update' product.product.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_add_media' product_id=product.product.id %}" class="btn btn-danger btn-block">ADD MEDIA <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_edit_media' product_id=product.product.id %}" class="btn btn-success btn-block">EDIT MEDIA <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_add_stocks' product_id=product.product.id %}" class="btn btn-primary btn-block">ADD STOCKS <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_edit' product_id=product.product.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>
         </article>

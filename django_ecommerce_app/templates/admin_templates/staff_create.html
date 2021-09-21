@@ -1,13 +1,13 @@
 {% extends 'admin_templates/base.html' %}
-{% block title %}Create Customer{% endblock title %}
+{% block title %}Create Staff {% endblock title %}
 {% block custom_css %}{% endblock custom_css %}
-{% block page_title %}Create Customer{% endblock page_title %}
+{% block page_title %}Create Staff {% endblock page_title %}
 {% block page_content %}
 <div class="row">
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Customer Users</h4>
+                <h4>Staff User</h4>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
                         <label>Profile Image</label>
                         <input type="file" name="profile_pic" id="profile_pic" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">SAVE CUSTOMER USER</button>
+                    <button type="submit" class="btn btn-primary btn-block">SAVE STAFF USER</button>
                 </form>
             </div>
         </div>

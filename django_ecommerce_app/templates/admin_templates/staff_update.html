@@ -1,13 +1,13 @@
-{% extends 'admin_templates/base.html' %}
-{% block title %}Create Customer{% endblock title %}
+{% extends 'admin_templates/base_template.html' %}
+{% block title %}Update staff {% endblock title %}
 {% block custom_css %}{% endblock custom_css %}
-{% block page_title %}Create Customer{% endblock page_title %}
+{% block page_title %}Update staff {% endblock page_title %}
 {% block page_content %}
 <div class="row">
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Customer Users</h4>
+                <h4>Update staff user</h4>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
@@ -15,19 +15,26 @@
                     {% for field in form %}
                     <div class="form-group">
                         <label>{{ field.label }}</label>
-                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control">
+                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control" value='{{ field.value }}'>
                         {% if field.errors %}
                         <div class="alert alert-danger" style="margin:10px">
-                            {{ field.errors }}
+                           {{ field.errors }}
                         </div>
                         {% endif %}
                     </div>
                     {% endfor %}
+
                     <div class="form-group">
-                        <label>Profile Image</label>
+                        <label>Current profile picture</label><br>
+                        <img src='{{ staffuser.profile_pic }}' alt="staff picture" style='height:150px'/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profile picture</label>
                         <input type="file" name="profile_pic" id="profile_pic" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">SAVE CUSTOMER USER</button>
+
+                    <button type="submit" class="btn btn-warning btn-block">SAVE STAFF USER</button>
                 </form>
             </div>
         </div>
