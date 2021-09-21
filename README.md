@@ -1,6 +1,8 @@
 # DJANGO ECOMMERCE PROJECT
 ### How to run
 ##### 1. Terminal:
+* `python3 manage.py runserver`
+or:
 * `python3 manage.py makemigrations`
 * `python3 manage.py migrate`
 * `python3 manage.py createsuperuser`
