@@ -13,10 +13,8 @@
                     {% for field in form %}
                     <div class="form-group">
                         <label>{{ field.label }}</label>
-                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control">
-                        {% if field.errors %}
-                        <div class="alert alert-danger" style="margin:10px">{{ field.errors }}</div>
-                        {% endif %}
+                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control {% if field.errors %}is-invalid {% else %} is-valid {% endif %}">
+                        <small class="form-text text-danger form-feedback">{{ field.errors }}</small>
                     </div>
                     {% endfor %}
                     <div class="form-group">
@@ -43,10 +41,10 @@
                         <label class="custom-switch mt-2">
                             <input type="checkbox" name="is_added_by_admin" class="custom-switch-input">
                             <span class="custom-switch-indicator"></span>
-                            <span class="custom-switch-description">Is added by Admin?</span>
+                            <span class="custom-switch-description">Is added by admin?</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-block">SAVE MERCHANT USER</button>
+                    <button type="submit" class="btn btn-primary btn-block">SAVE MERCHANT USER</button>
                 </form>
             </div>
         </div>

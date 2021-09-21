@@ -41,14 +41,14 @@ class CategoriesListView(ListView):
 
 class CategoriesCreate(SuccessMessageMixin,CreateView):
     model=Categories
-    success_message="Category Added!"
     fields="__all__"
+    success_message="Created 01 category successfully!"
     template_name="admin_templates/category_create.html"
 
 
 class CategoriesUpdate(SuccessMessageMixin,UpdateView):
     model=Categories
-    success_message="Category Updated!"
+    success_message="Updated 01 category successfully!"
     fields="__all__"
     template_name="admin_templates/category_update.html"
 
@@ -77,14 +77,14 @@ class SubCategoriesListView(ListView):
 
 class SubCategoriesCreate(SuccessMessageMixin,CreateView):
     model=SubCategories
-    success_message="Sub Category Added!"
+    success_message="Added 01 sub category successfully!"
     fields="__all__"
     template_name="admin_templates/sub_category_create.html"
 
 
 class SubCategoriesUpdate(SuccessMessageMixin,UpdateView):
     model=SubCategories
-    success_message="Sub Category Updated!"
+    success_message="Updated 01 sub category successfully!"
     fields="__all__"
     template_name="admin_templates/sub_category_update.html"
 
@@ -139,7 +139,7 @@ class MerchantUserCreateView(SuccessMessageMixin,CreateView):
             is_added_by_admin=True
         user.merchantuser.is_added_by_admin=is_added_by_admin
         user.save()
-        messages.success(self.request,"Merchant User Created")
+        messages.success(self.request, "Create 01 merchant user successfully!")
         return HttpResponseRedirect(reverse("merchant_list"))
 
 
@@ -177,7 +177,7 @@ class MerchantUserUpdateView(SuccessMessageMixin,UpdateView):
             is_added_by_admin=True
         merchantuser.is_added_by_admin=is_added_by_admin
         merchantuser.save()
-        messages.success(self.request,"Merchant User Updated")
+        messages.success(self.request,"Updated 01 merchant user successfully!")
         return HttpResponseRedirect(reverse("merchant_list"))
 
 
@@ -232,7 +232,7 @@ class ProductView(View):
         for product_tag in product_tags_list:
             product_tag_obj=ProductTags(product_id=product,title=product_tag)
             product_tag_obj.save()
-        product_transaction=ProductTransaction(product_id=product,transaction_type=1,transaction_product_count=in_stock_total,transaction_description="Intially Item Added in Stocks")
+        product_transaction=ProductTransaction(product_id=product,transaction_type=1,transaction_product_count=in_stock_total,transaction_description="Intially item added in stocks")
         product_transaction.save()
         return HttpResponse("OK")
 
@@ -284,7 +284,6 @@ class ProductEdit(View):
         for category in categories:
             sub_category=SubCategories.objects.filter(is_active=1,category_id=category.id)
             categories_list.append({"category":category,"sub_category":sub_category})
-
         return render(request,"admin_templates/product_edit.html",{"categories":categories_list,"product":product,"product_details":product_details,"product_about":product_about,"product_tags":product_tags})
 
     def post(self,request,*args,**kwargs):
@@ -321,7 +320,7 @@ class ProductEdit(View):
                 product_details=ProductDetails(title=title_title,title_details=title_details_list[j],product_id=product)
                 product_details.save()
             else: 
-                if title_title!="":               
+                if title_title!="":
                     product_details=ProductDetails.objects.get(id=detail_id)
                     product_details.title=title_title
                     product_details.title_details=title_details_list[j]
@@ -346,7 +345,7 @@ class ProductEdit(View):
         for product_tag in product_tags_list:
             product_tag_obj=ProductTags(product_id=product,title=product_tag)
             product_tag_obj.save()
-        return HttpResponse("OK")
+        return HttpResponse("Updated 01 product successfully!")
 
 
 class ProductAddMedia(View):
@@ -368,7 +367,7 @@ class ProductAddMedia(View):
             product_media=ProductMedia(product_id=product,media_type=media_type_list[i],media_content=media_url)
             product_media.save()
             i=i+1
-        return HttpResponse("OK")
+        return HttpResponse("Added media to product successfully!")
 
 
 class ProductEditMedia(View):
@@ -408,7 +407,7 @@ class ProductAddStocks(View):
         product.in_stock_total=new_stocks
         product.save()
         product_obj=Products.objects.get(id=product_id)
-        product_transaction=ProductTransaction(product_id=product_obj,transaction_product_count=new_instock,transaction_description="New Product Added",transaction_type=1)
+        product_transaction=ProductTransaction(product_id=product_obj,transaction_product_count=new_instock,transaction_description="Add product stock successfully!",transaction_type=1)
         product_transaction.save()
         return HttpResponseRedirect(reverse("product_add_stocks",kwargs={"product_id":product_id}))
 
@@ -455,7 +454,7 @@ class StaffUserCreateView(SuccessMessageMixin,CreateView):
         profile_pic_url=fs.url(filename)
         user.staffuser.profile_pic=profile_pic_url
         user.save()
-        messages.success(self.request,"Staff User Created")
+        messages.success(self.request,"Created 01 staff user successfully!")
         return HttpResponseRedirect(reverse("staff_list"))
 
 class StaffUserUpdateView(SuccessMessageMixin,UpdateView):
@@ -483,7 +482,7 @@ class StaffUserUpdateView(SuccessMessageMixin,UpdateView):
             profile_pic_url=fs.url(filename)
             staffuser.profile_pic=profile_pic_url
         staffuser.save()
-        messages.success(self.request,"Staff User Updated")
+        messages.success(self.request,"Updated 01 staff user successfully!")
         return HttpResponseRedirect(reverse("staff_list"))
 
 
@@ -529,7 +528,7 @@ class CustomerUserCreateView(SuccessMessageMixin,CreateView):
         profile_pic_url=fs.url(filename)
         user.customeruser.profile_pic=profile_pic_url
         user.save()
-        messages.success(self.request,"Customer User Created")
+        messages.success(self.request,"Created 01 customer user successfully!")
         return HttpResponseRedirect(reverse("customer_list"))
 
 
@@ -558,5 +557,5 @@ class CustomerUserUpdateView(SuccessMessageMixin,UpdateView):
             profile_pic_url=fs.url(filename)
             customeruser.profile_pic=profile_pic_url
         customeruser.save()
-        messages.success(self.request,"Customer User Updated")
+        messages.success(self.request,"Updated 01 customer user successfully!")
         return HttpResponseRedirect(reverse("customer_list"))

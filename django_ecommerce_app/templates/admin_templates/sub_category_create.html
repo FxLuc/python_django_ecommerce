@@ -7,7 +7,7 @@
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Sub Categories</h4>
+                <h4>Sub Category</h4>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
@@ -28,13 +28,13 @@
                         {% endif %}
 
                         {% if field.errors %}
-                        <div class="alert alert-danger" style="margin:10px">
+                        <div class="alert alert-danger">
                             {{ field.errors }}
                         </div>
                         {% endif %}
                     </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-warning btn-block">SAVE SUB CATEGORY</button>
+                    <button type="submit" class="btn btn-primary btn-block">SAVE SUB CATEGORY</button>
                 </form>
             </div>
         </div>
