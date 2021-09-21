@@ -23,7 +23,7 @@
 <div class="row">
     {% for merchantuser in merchantuser_list %}
     <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-        <article class="article article-style-b">
+        <article class="article article-style-b hover">
             <div class="article-header">
                 <div class="article-image" data-background="{{ merchantuser.profile_pic }}"></div>
                 <div class="article-badge">
@@ -34,6 +34,7 @@
             </div>
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ merchantuser.auth_user_id.first_name }} {{ merchantuser.auth_user_id.last_name }}</div>
+                <div class="text-black-50">ID:<span class="text-dark"> {{ merchantuser.id }}<span></div>
                 Phone number: <span class="text-dark">{{ merchantuser.phone_number }}</span><br/>
                 Email: <span class="text-dark">{{ merchantuser.auth_user_id.email }}</span><br/>
                 GST: <span class="text-dark">{{ merchantuser.gst_details }}</span><br/>

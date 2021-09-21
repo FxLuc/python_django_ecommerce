@@ -13,7 +13,7 @@
                     <a href="{% url 'staff_list' %}?filter={{ filter }}&orderby=id">ID</a>  | 
                     <a href="{% url 'staff_list' %}?filter={{ filter }}&orderby=created_at">Newest</a> |  
                     <a href="{% url 'staff_list' %}?filter={{ filter }}&orderby=auth_user_id__first_name">First Name</a> |
-                    <a href="{% url 'staff_list' %}?filter={{ filter }}&orderby=auth_user_id__username">Username</a> |
+                    <a href="{% url 'staff_list' %}?filter={{ filter }}&orderby=auth_user_id__username">Username</a>
                 </div>
             </div>
         </div>
@@ -27,19 +27,18 @@
             <div class="article-header">
                 <div class="article-image" data-background="{{ staffuser.profile_pic }}" style="background-image: url(&quot;assets/img/news/img13.jpg&quot;);"></div>
                 <div class="article-badge">
-                    <div class="article-badge-item bg-danger"><em class="fas fa-fire"></em>{{ staffuser.auth_user_id.username }}</div>
+                    <div class="badge {% if staffuser.auth_user_id.is_active == 1 %} badge-info {% endif %}{% if staffuser.auth_user_id.is_active == 0 %} badge-light {% endif %}">
+                        <span>Active</span>
+                    </div>
                 </div>
             </div>
             <div class="article-details">
-                </em> Name: {{ staffuser.auth_user_id.first_name }} {{ staffuser.auth_user_id.last_name }}</span>
-                </em> Email: {{ staffuser.auth_user_id.email }}</span>
+                <div class="text-danger font-weight-bold text-center">{{ staffuser.auth_user_id.first_name }} {{ staffuser.auth_user_id.last_name }}</div>
+                <div class="text-black-50">ID:<span class="text-dark"> {{ staffuser.id }}<span></div>
+                Email: <span class="text-dark">{{ staffuser.auth_user_id.email }}</span><br/>
+                Username: <span class="text-dark">{{ staffuser.auth_user_id.username  }}</span><br/>
                 <div class="article-cta">
-                    <label class="custom-switch mt-2" style="float:left">
-                        <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" {% if staffuser.auth_user_id.is_active == 1 %}checked{% endif %}>
-                        <span class="custom-switch-indicator"></span>
-                        <span class="custom-switch-description">ACTIVE</span>
-                    </label>
-                    <a href="{% url 'staff_update' staffuser.auth_user_id.id %}" class="btn btn-warning">EDIT <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'staff_update' staffuser.auth_user_id.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>
         </article>

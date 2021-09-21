@@ -15,21 +15,27 @@
                     {% for field in form %}
                     <div class="form-group">
                         <label>{{ field.label }}</label>
-                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control" value='{{ field.value }}'>
+                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control {% if field.errors %}is-invalid{% endif %}" value="{{field.value}}">
                         {% if field.errors %}
-                        <div class="alert alert-danger" style="margin:10px">
-                            {{ field.errors }}
-                        </div>
+                        <small class="form-text text-danger form-feedback">{{ field.errors }}</small>
                         {% endif %}
                     </div>
                     {% endfor %}
                     <div class="form-group">
-                        <label>Current Profile Image</label><br>
-                        <img src='{{ customeruser.profile_pic }}' alt="customer user picture" style='height:150px'/>
+                        <label>Current profile picture</label><br>
+                        <img src="/media/{{ customer_user.profile_pic }}" alt="customer user picture" style='height:150px'/>
                     </div>
                     <div class="form-group">
-                        <label>Profile Image</label>
+                        <label>Profile picture</label>
                         <input type="file" name="profile_pic" id="profile_pic" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" name="address" id="address" class="form-control" value="{{ customer_user.address }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone number</label>
+                        <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ customer_user.phone_number }}">
                     </div>
                     <button type="submit" class="btn btn-warning btn-block">SAVE CUSTOMER USER</button>
                 </form>

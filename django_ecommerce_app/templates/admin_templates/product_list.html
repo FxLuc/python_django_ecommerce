@@ -33,14 +33,15 @@
             </div>
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ product.product.product_name }}</div>
-                <div class="text-black-50">Sub category title:</div>
-                <div class="text-dark">{{ product.product.subcategories_id.title }}</div>
-                <div class="text-black-50">Url slug:</div>
-                <div class="text-primary"><em>{{ product.product.url_slug}}</em></div>
+                <div class="text-black-50">ID:<span class="text-dark"> {{ product.product.id }}<span></div>
+                <div class="text-black-50">In stocks: <span class="text-dark">{{ product.product.in_stock_total }}</span></div>
+                <div class="text-black-50">Sub category title: <span class="text-dark">{{ product.product.subcategories_id.title }}</span></div>
+                <div class="text-black-50">Url slug: <em class="text-primary">{{ product.product.url_slug}}</em></div>
+                <div class="text-black-50">Max price: <span class="text-dark">{{ product.product.product_max_price }}</span></div>
                 <div class="article-cta mt-2">
-                    <a href="{% url 'product_add_media' product_id=product.product.id %}" class="btn btn-danger btn-block">ADD MEDIA <em class="fas fa-chevron-right"></em></a>
-                    <a href="{% url 'product_edit_media' product_id=product.product.id %}" class="btn btn-success btn-block">EDIT MEDIA <em class="fas fa-chevron-right"></em></a>
-                    <a href="{% url 'product_add_stocks' product_id=product.product.id %}" class="btn btn-primary btn-block">ADD STOCKS <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_add_media' product_id=product.product.id %}" class="btn btn-primary btn-block">ADD MEDIA <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_edit_media' product_id=product.product.id %}" class="btn btn-primary btn-block">EDIT MEDIA <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'product_add_stocks' product_id=product.product.id %}" class="btn btn-primary btn-block">EDIT STOCKS <em class="fas fa-chevron-right"></em></a>
                     <a href="{% url 'product_edit' product_id=product.product.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>

@@ -34,10 +34,8 @@
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ category.title }}</div>
                 <div class="text-black-50">ID:<span class="text-dark"> {{ category.id }}<span></div>
-                <div class="text-black-50">Url slug:</div>
-                <div class="text-primary"><em>{{ category.url_slug }}</em></div>
-                <div class="text-black-50">Description:</div>
-                <div class="text-dark">{{ category.description }}</div>
+                <div class="text-black-50">Url slug: <em class="text-primary">{{ category.url_slug }}</em></div>
+                <div class="text-black-50">Description: <span class="text-dark">{{ category.description }}</span></div>
                 <div class="article-cta">
                     <a href="{% url 'category_update' category.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>

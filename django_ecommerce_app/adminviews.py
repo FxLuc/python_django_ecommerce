@@ -20,7 +20,7 @@ def admin_home(request):
 class CategoriesListView(ListView):
     model=Categories
     template_name="admin_templates/category_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -56,7 +56,7 @@ class CategoriesUpdate(SuccessMessageMixin,UpdateView):
 class SubCategoriesListView(ListView):
     model=SubCategories
     template_name="admin_templates/sub_category_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -92,7 +92,7 @@ class SubCategoriesUpdate(SuccessMessageMixin,UpdateView):
 class MerchantUserListView(ListView):
     model=MerchantUser
     template_name="admin_templates/merchant_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -249,7 +249,7 @@ def file_upload(request):
 class ProductListView(ListView):
     model=Products
     template_name="admin_templates/product_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -415,7 +415,7 @@ class ProductAddStocks(View):
 class StaffUserListView(ListView):
     model=StaffUser
     template_name="admin_templates/staff_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -440,14 +440,14 @@ class StaffUserCreateView(SuccessMessageMixin,CreateView):
     fields=["first_name","last_name","email","username","password"]
 
     def form_valid(self,form):
-        #Saving Custom User Object for Merchant User
+        #Saving Custom User Object for Staff User
         user=form.save(commit=False)
         user.is_active=True
         user.user_type=2
         user.set_password(form.cleaned_data["password"])
         user.save()
 
-        #Saving Merchant user
+        #Saving Staff user
         profile_pic=self.request.FILES["profile_pic"]
         fs=FileSystemStorage()
         filename=fs.save(profile_pic.name,profile_pic)
@@ -469,11 +469,11 @@ class StaffUserUpdateView(SuccessMessageMixin,UpdateView):
         return context
 
     def form_valid(self,form):
-        #Saving Custom User Object for Merchant User
+        #Saving Custom User Object for Staff User
         user=form.save(commit=False)
         user.save()
 
-        #Saving Merchant user
+        #Saving Staff user
         staffuser=StaffUser.objects.get(auth_user_id=user.id)
         if self.request.FILES.get("profile_pic",False):
             profile_pic=self.request.FILES["profile_pic"]
@@ -489,7 +489,7 @@ class StaffUserUpdateView(SuccessMessageMixin,UpdateView):
 class CustomerUserListView(ListView):
     model=CustomerUser
     template_name="admin_templates/customer_list.html"
-    paginate_by=3
+    paginate_by=4
 
     def get_queryset(self):
         filter_val=self.request.GET.get("filter","")
@@ -514,19 +514,20 @@ class CustomerUserCreateView(SuccessMessageMixin,CreateView):
     fields=["first_name","last_name","email","username","password"]
 
     def form_valid(self,form):
-        #Saving Custom User Object for Merchant User
+        #Saving Custom User Object for Customer User
         user=form.save(commit=False)
-        user.is_active=True
         user.user_type=4
         user.set_password(form.cleaned_data["password"])
         user.save()
 
-        #Saving Merchant user
+        #Saving Customer user
         profile_pic=self.request.FILES["profile_pic"]
         fs=FileSystemStorage()
         filename=fs.save(profile_pic.name,profile_pic)
         profile_pic_url=fs.url(filename)
         user.customeruser.profile_pic=profile_pic_url
+        user.customeruser.address=self.request.POST.get("address")
+        user.customeruser.phone_number=self.request.POST.get("phone_number")
         user.save()
         messages.success(self.request,"Created 01 customer user successfully!")
         return HttpResponseRedirect(reverse("customer_list"))
@@ -540,22 +541,23 @@ class CustomerUserUpdateView(SuccessMessageMixin,UpdateView):
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         customeruser=CustomerUser.objects.get(auth_user_id=self.object.pk)
-        context["CustomerUser"]=customeruser
+        context["customeruser"]=customeruser
         return context
 
     def form_valid(self,form):
-        #Saving Custom User Object for Merchant User
+        #Saving Custom User Object for customer User
         user=form.save(commit=False)
-        user.save()
 
-        #Saving Merchant user
+        #Saving customer user
         customeruser=CustomerUser.objects.get(auth_user_id=user.id)
         if self.request.FILES.get("profile_pic",False):
             profile_pic=self.request.FILES["profile_pic"]
             fs=FileSystemStorage()
             filename=fs.save(profile_pic.name,profile_pic)
             profile_pic_url=fs.url(filename)
-            customeruser.profile_pic=profile_pic_url
-        customeruser.save()
+            user.customeruser.profile_pic=profile_pic_url
+        user.customeruser.address=self.request.POST.get("address")
+        user.customeruser.phone_number=self.request.POST.get("phone_number")
+        user.customeruser.save()
         messages.success(self.request,"Updated 01 customer user successfully!")
         return HttpResponseRedirect(reverse("customer_list"))
