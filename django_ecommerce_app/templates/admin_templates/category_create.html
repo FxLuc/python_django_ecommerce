@@ -13,7 +13,9 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
-                    {% if field.name == "is_active" %}
+                    {% if field.name == "id" %}
+                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="d-none">
+                    {% elif field.name == "is_active" %}
                     <div class="form-group">
                         <label class="custom-switch mt-2">
                             <input type="checkbox" name="is_active" value="1" class="custom-switch-input">
@@ -29,7 +31,7 @@
                     </div>
                     {% endif %}
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary btn-block">SAVE CATEGORY</button>
+                    <button type="submit" class="btn btn-danger btn-block">SAVE CATEGORY</button>
                 </form>
             </div>
         </div>

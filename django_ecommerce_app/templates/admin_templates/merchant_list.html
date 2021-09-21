@@ -34,11 +34,11 @@
             </div>
             <div class="article-details">
                 <div class="text-danger font-weight-bold text-center">{{ merchantuser.auth_user_id.first_name }} {{ merchantuser.auth_user_id.last_name }}</div>
+                Phone number: <span class="text-dark">{{ merchantuser.phone_number }}</span><br/>
                 Email: <span class="text-dark">{{ merchantuser.auth_user_id.email }}</span><br/>
                 GST: <span class="text-dark">{{ merchantuser.gst_details }}</span><br/>
                 Company: <span class="text-dark">{{ merchantuser.company_name }}</span><br/>
                 Address: <span class="text-dark">{{ merchantuser.address }}</span><br/>
-                Phone number: <span class="text-dark">{{ merchantuser.phone_number }}</span><br/>
                 <div class="article-cta">
                     <a href="{% url 'merchant_update' merchantuser.auth_user_id.id %}" class="btn btn-block btn-warning"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
