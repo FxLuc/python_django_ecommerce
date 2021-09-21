@@ -7,34 +7,43 @@
     <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Sub Categories</h4>
+                <h4>Sub Category</h4>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
-                    <div class="form-group">
-                        <label>{{ field.label }}</label>
-                        {% if field.field.widget.input_type != "select" %}
-                        <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control">
-                        {% endif %}
+                        {% if field.name == "id" %}
+                            <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="d-none">
+                        {% elif field.name == "is_active" %}
+                        <div class="form-group">
+                            <label class="custom-switch mt-2">
+                                <input type="checkbox" name="is_active" value="1" checked class="custom-switch-input">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">Is active?</span>
+                            </label>
+                        </div>
+                        {% else %}
+                        <div class="form-group">
+                            <label>{{ field.label }}</label>
+                            {% if field.field.widget.input_type != "select" %}
+                            <input type="{{ field.field.widget.input_type }}" name={{ field.name }} id="{{ field.name }}" class="form-control {% if field.errors %}is-invalid{% endif %}">
+                            {% endif %}
 
-                        {% if field.field.widget.input_type == "select" %}
-                        <select name={{ field.name }} id="{{ field.name }}" class="form-control">
-                            {% for id,value in field.field.choices %}
-                                <option value="{{ id }}">{{ value }}</option>
-                            {% endfor %}
-                        </select>
-                        {% endif %}
-
-                        {% if field.errors %}
-                        <div class="alert alert-danger" style="margin:10px">
-                            {{ field.errors }}
+                            {% if field.field.widget.input_type == "select" %}
+                            <select name={{ field.name }} id="{{ field.name }}" class="form-control {% if field.errors %}is-invalid{% endif %}">
+                                {% for id,value in field.field.choices %}
+                                    <option value="{{ id }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                            {% endif %}
+                            {% if field.errors %}
+                                <small class="form-text text-danger form-feedback">{{ field.errors }}</small>
+                            {% endif %}
                         </div>
                         {% endif %}
-                    </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-warning btn-block">SAVE SUB CATEGORY</button>
+                    <button type="submit" class="btn btn-danger btn-block">CREATE SUB CATEGORY</button>
                 </form>
             </div>
         </div>

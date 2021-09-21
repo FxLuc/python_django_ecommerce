@@ -26,18 +26,16 @@
         <article class="article article-style-b">
             <div class="article-header">
                 <div class="article-image" data-background="{{ customeruser.profile_pic }}"></div>
-                <div class="article-badge">
-                    <div class="badge {% if customeruser.is_active == 1 %} badge-info {% endif %}{% if customeruser.is_active == 0 %} badge-light {% endif %}">
-                        <span>Active</span>
-                    </div>
-                </div>
             </div>
             <div class="article-details">
-                <div class="text-danger font-weight-bold text-center">{{ customeruser.auth_user_id.username }}</div>
-                Email: <div class="text-dark">{{ customeruser.auth_user_id.email }}</div>
-                Name:<div class="text-dark">{{ customeruser.auth_user_id.first_name }} {{ customeruser.auth_user_id.last_name }}</div>
+                <div class="text-danger font-weight-bold text-center">{{ customeruser.auth_user_id.first_name }} {{ customeruser.auth_user_id.last_name }}</div>
+                <div class="text-black-50">ID:<span class="text-dark"> {{ customeruser.id }}<span></div>
+                Phone number: <span class="text-dark">{{ customeruser.phone_number }}</span><br/>
+                Email: <span class="text-dark">{{ customeruser.auth_user_id.email }}</span><br/>
+                Address: <span class="text-dark">{{ customeruser.address }}</span><br/>
+                Username: <span class="text-dark">{{ customeruser.auth_user_id.username  }}</span><br/>
                 <div class="article-cta">
-                    <a href="{% url 'customer_update' customeruser.auth_user_id.id %}" class="btn btn-warning">EDIT <em class="fas fa-chevron-right"></em></a>
+                    <a href="{% url 'customer_update' customeruser.auth_user_id.id %}" class="btn btn-block btn-warning px-4"><em class="fas fa-edit"></em> EDIT <em class="fas fa-chevron-right"></em></a>
                 </div>
             </div>
         </article>
