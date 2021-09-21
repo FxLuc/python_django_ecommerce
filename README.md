@@ -1,6 +1,6 @@
 # DJANGO ECOMMERCE PROJECT
 ----------
-#### How to run
+### How to run
 ##### 1. Terminal:
 * `python3 manage.py makemigrations`
 * `python3 manage.py migrate`
