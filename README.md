@@ -12,7 +12,7 @@
 `python3 manage.py runserver`
 
 ### 2. Browser:
-** 127.0.0.1/admin
+** 127.0.0.1/admin **
 
 
 ----------
