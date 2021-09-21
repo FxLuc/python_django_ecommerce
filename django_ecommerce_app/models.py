@@ -32,7 +32,7 @@ class MerchantUser(models.Model):
     gst_details = models.CharField(max_length=150)
     address = models.TextField(default="")
     phone_number = models.CharField(default="", max_length=13)
-    is_added_by_admin = models.BooleanField(default=False)
+    is_added_by_admin = models.BooleanField(default=True)
     objects = models.Manager()
 
 
