@@ -12,11 +12,10 @@ or:
 ##### 2. Browser:
 * 127.0.0.1:8000/admin
 
+### ER DIAGRAM
+<img src="media/ERD_Diagram.png" style="width:100%" alt="ER Diagram"/>
+
 ----------
 #### [Le Tuan Luc](https://github.com/often127)
 #### [Pham Quan](https://github.com/quanpham1008)
 ##### Thanks to [Luong Anh Tuan]() and [Hackstartsj]()
-
-
-### ER DIAGRAM
-<img src="media/ERD_Diagram.png" style="width:100%" alt="ER Diagram"/>
