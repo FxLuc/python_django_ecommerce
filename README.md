@@ -14,8 +14,8 @@ or:
 
 ----------
 #### [Le Tuan Luc](https://github.com/often127)
-#### Pham Quan
-###### Thanks to hackstartsj
+#### [Pham Quan](https://github.com/quanpham1008)
+##### Thanks to [Luong Anh Tuan]() and [Hackstartsj]()
 
 
 ### ER DIAGRAM
