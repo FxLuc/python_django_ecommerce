@@ -294,13 +294,13 @@ class ProductEdit(View):
         product_max_price=request.POST.get("product_max_price")
         product_discount_price=request.POST.get("product_discount_price")
         product_description=request.POST.get("product_description")
+        product_long_description=request.POST.get("product_long_description")
         title_title_list=request.POST.getlist("title_title[]")
         details_ids=request.POST.getlist("details_id[]")
         title_details_list=request.POST.getlist("title_details[]")
         about_title_list=request.POST.getlist("about_title[]")
         about_ids=request.POST.getlist("about_id[]")
         product_tags=request.POST.get("product_tags")
-        long_desc=request.POST.get("long_desc")
         subcat_obj=SubCategories.objects.get(id=sub_category)
         product_id=kwargs["product_id"]
         product=Products.objects.get(id=product_id)
@@ -311,7 +311,7 @@ class ProductEdit(View):
         product.product_description=product_description
         product.product_max_price=product_max_price
         product.product_discount_price=product_discount_price
-        product.product_long_description=long_desc
+        product.product_long_description=product_long_description
         product.save()
         j=0
         for title_title in title_title_list:
@@ -345,7 +345,8 @@ class ProductEdit(View):
         for product_tag in product_tags_list:
             product_tag_obj=ProductTags(product_id=product,title=product_tag)
             product_tag_obj.save()
-        return HttpResponse("Updated 01 product successfully!")
+        messages.success(self.request,"Updated 01 product user successfully!")
+        return HttpResponseRedirect(reverse("product_list"))
 
 
 class ProductAddMedia(View):
@@ -359,14 +360,12 @@ class ProductAddMedia(View):
         product=Products.objects.get(id=product_id)
         media_type_list=request.POST.getlist("media_type[]")
         media_content_list=request.FILES.getlist("media_content[]")
-        i=0
         for media_content in media_content_list:
             fs=FileSystemStorage()
             filename=fs.save(media_content.name,media_content)
             media_url=fs.url(filename)
             product_media=ProductMedia(product_id=product,media_type=media_type_list[i],media_content=media_url)
             product_media.save()
-            i=i+1
         return HttpResponse("Added media to product successfully!")
 
 
@@ -547,6 +546,7 @@ class CustomerUserUpdateView(SuccessMessageMixin,UpdateView):
     def form_valid(self,form):
         #Saving Custom User Object for customer User
         user=form.save(commit=False)
+        user.save()
 
         #Saving customer user
         customeruser=CustomerUser.objects.get(auth_user_id=user.id)
@@ -555,9 +555,9 @@ class CustomerUserUpdateView(SuccessMessageMixin,UpdateView):
             fs=FileSystemStorage()
             filename=fs.save(profile_pic.name,profile_pic)
             profile_pic_url=fs.url(filename)
-            user.customeruser.profile_pic=profile_pic_url
-        user.customeruser.address=self.request.POST.get("address")
-        user.customeruser.phone_number=self.request.POST.get("phone_number")
-        user.customeruser.save()
+            customeruser.profile_pic=profile_pic_url
+        customeruser.address=self.request.POST.get("address")
+        customeruser.phone_number=self.request.POST.get("phone_number")
+        customeruser.save()
         messages.success(self.request,"Updated 01 customer user successfully!")
         return HttpResponseRedirect(reverse("customer_list"))
