@@ -23,4 +23,4 @@ First:
 
 ----------
 #### [Le Tuan Luc](https://github.com/often127) | [Pham Quan](https://github.com/quanpham1008)
-##### Thanks to [Luong Anh Tuan]() and [Hackstartsj]()
+##### Thanks to [Luong Anh Tuan]() and [Hackstarsj]()
