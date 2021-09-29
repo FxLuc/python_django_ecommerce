@@ -234,7 +234,8 @@ class ProductView(View):
             product_tag_obj.save()
         product_transaction=ProductTransaction(product_id=product,transaction_type=1,transaction_product_count=in_stock_total,transaction_description="Intially item added in stocks")
         product_transaction.save()
-        return HttpResponse("OK")
+        messages.success(self.request,"Created 01 product user successfully!")
+        return HttpResponseRedirect(reverse("product_list"))
 
 
 @csrf_exempt

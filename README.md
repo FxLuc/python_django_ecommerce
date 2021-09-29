@@ -2,11 +2,11 @@
 
 ### How to run
 
-##### 0. Make sure you have Django installed.
+#### 0. Make sure you have Django installed.
 If not:
 * `python -m pip install Django`
 
-##### 1. Terminal:
+#### 1. Terminal:
 * `python3 manage.py runserver`
 
 First:
@@ -15,7 +15,7 @@ First:
 * `python3 manage.py createsuperuser`
 * `python3 manage.py runserver`
 
-##### 2. Browser:
+#### 2. Browser:
 * 127.0.0.1:8000/admin
 
 ### ERD
